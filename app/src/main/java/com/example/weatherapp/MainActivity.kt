@@ -36,14 +36,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         val weatherViewModel = ViewModelProvider(this)[WeatherViewModel::class.java]
-        // val text = { mutableStateOf("Bangalore") }
         weatherViewModel.getData("bangalore")  // city name
         enableEdgeToEdge()
         setContent {
             WeatherAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
+                    WeatherFun(
                         weatherViewModel,
                         modifier = Modifier.padding(innerPadding)
                     )
@@ -54,16 +52,9 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, viewModel: WeatherViewModel, modifier: Modifier = Modifier) {
-    /*Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )*/
+fun WeatherFun( viewModel: WeatherViewModel, modifier: Modifier = Modifier) {
 
-    var city by remember { mutableStateOf("") }
     val weatherResult by viewModel.weatherResult.observeAsState()
-    var cityName = "Bangalore"
-    var tempCity = "24"
     var text by rememberSaveable { mutableStateOf("Bangalore") }
     // viewModel.getData(text)  // city name
 
@@ -86,9 +77,6 @@ fun Greeting(name: String, viewModel: WeatherViewModel, modifier: Modifier = Mod
 
         when (val result = weatherResult) {
             is NetworkResponse.Success -> {
-                cityName = result.data.location.name
-                tempCity = result.data.current.temp_c.toString()
-
                 Column (
                     Modifier.padding(20.dp, 30.dp)
                 ) {
@@ -154,6 +142,6 @@ fun Greeting(name: String, viewModel: WeatherViewModel, modifier: Modifier = Mod
 @Composable
 fun GreetingPreview() {
     WeatherAppTheme {
-        Greeting("Android", WeatherViewModel() )
+        WeatherFun(WeatherViewModel() )
     }
 }
