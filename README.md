@@ -9,5 +9,5 @@ Set up and Run the Application-
 
 Use Case-
 - default location in the app is Bangalore.
-- you can chnage the location by entering the city name in the input field
+- you can change the location by entering the city name in the input field
 - It shows current temperature in Celsius, current time and date, and the entered location.

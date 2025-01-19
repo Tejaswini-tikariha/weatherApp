@@ -140,7 +140,7 @@ fun WeatherFun( viewModel: WeatherViewModel, modifier: Modifier = Modifier) {
 
 @Preview(showSystemUi = true, showBackground = true)
 @Composable
-fun GreetingPreview() {
+fun WeatherFunPreview() {
     WeatherAppTheme {
         WeatherFun(WeatherViewModel() )
     }
